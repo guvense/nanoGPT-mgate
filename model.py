@@ -224,22 +224,23 @@ class GPT(nn.Module):
             x, M = block(x, M)
         x = self.transformer.ln_f(x)
 
+        aux_loss = None
         if targets is not None:
             # if we are given some desired targets also calculate the loss
             logits = self.lm_head(x)
             loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1), ignore_index=-1)
             # auxiliary next-token loss from the final M state (turns previously-dead
-            # last-block M into a useful prediction signal)
+            # last-block M into a useful prediction signal). Returned SEPARATELY so
+            # eval/reporting sees only the main loss; training combines them.
             if self._use_aux_loss:
                 m_logits = self.M_head(self.M_ln(M))
                 aux_loss = F.cross_entropy(m_logits.view(-1, m_logits.size(-1)), targets.view(-1), ignore_index=-1)
-                loss = loss + self.config.aux_loss_weight * aux_loss
         else:
             # inference-time mini-optimization: only forward the lm_head on the very last position
             logits = self.lm_head(x[:, [-1], :]) # note: using list [-1] to preserve the time dim
             loss = None
 
-        return logits, loss
+        return logits, loss, aux_loss
 
     def crop_block_size(self, block_size):
         # model surgery to decrease the block size if necessary
@@ -362,7 +363,7 @@ class GPT(nn.Module):
             # if the sequence context is growing too long we must crop it at block_size
             idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
             # forward the model to get the logits for the index in the sequence
-            logits, _ = self(idx_cond)
+            logits, _, _ = self(idx_cond)
             # pluck the logits at the final step and scale by desired temperature
             logits = logits[:, -1, :] / temperature
             # optionally crop the logits to only the top k options
