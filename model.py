@@ -145,6 +145,7 @@ class GPTConfig:
     dropout: float = 0.0
     bias: bool = True # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
     use_m_gate: bool = False # if True, add a per-token gated purpose state M that flows across blocks
+    aux_loss_weight: float = 0.0 # if > 0 (and use_m_gate), predict next token from final M via auxiliary head; adds α·CE to loss
 
 class GPT(nn.Module):
 
@@ -167,6 +168,15 @@ class GPT(nn.Module):
         # This behavior is deprecated and will be an error in future versions"
         # not 100% sure what this is, so far seems to be harmless. TODO investigate
         self.transformer.wte.weight = self.lm_head.weight # https://paperswithcode.com/method/weight-tying
+
+        # Auxiliary head that predicts next token from the final block's M state, encouraging
+        # M to encode information useful for token prediction (and giving the last block's M
+        # a real gradient path — otherwise it's discarded). Only constructed when enabled so
+        # the flag-off path stays bit-identical to vanilla.
+        self._use_aux_loss = config.use_m_gate and config.aux_loss_weight > 0
+        if self._use_aux_loss:
+            self.M_ln = LayerNorm(config.n_embd, bias=config.bias)
+            self.M_head = nn.Linear(config.n_embd, config.vocab_size, bias=False)
 
         # init all weights
         self.apply(self._init_weights)
@@ -218,6 +228,12 @@ class GPT(nn.Module):
             # if we are given some desired targets also calculate the loss
             logits = self.lm_head(x)
             loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1), ignore_index=-1)
+            # auxiliary next-token loss from the final M state (turns previously-dead
+            # last-block M into a useful prediction signal)
+            if self._use_aux_loss:
+                m_logits = self.M_head(self.M_ln(M))
+                aux_loss = F.cross_entropy(m_logits.view(-1, m_logits.size(-1)), targets.view(-1), ignore_index=-1)
+                loss = loss + self.config.aux_loss_weight * aux_loss
         else:
             # inference-time mini-optimization: only forward the lm_head on the very last position
             logits = self.lm_head(x[:, [-1], :]) # note: using list [-1] to preserve the time dim

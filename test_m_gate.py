@@ -109,7 +109,29 @@ def test_use_m_gate_false_matches_vanilla():
     print("PASS (c): use_m_gate=False is bit-identical to vanilla (params + forward output)")
 
 
+def test_aux_loss_activates_last_block():
+    """With aux_loss_weight > 0, the last block's W_gm should now receive a nonzero
+    gradient (previously it was dead because M_final was discarded)."""
+    torch.manual_seed(0)
+    cfg = GPTConfig(use_m_gate=True, aux_loss_weight=0.3, **small_cfg())
+    model = GPT(cfg)
+    idx = torch.randint(0, cfg.vocab_size, (2, 16))
+    tgt = torch.randint(0, cfg.vocab_size, (2, 16))
+    logits, loss = model(idx, tgt)
+    assert torch.isfinite(loss), f"loss NaN/Inf: {loss}"
+    loss.backward()
+    last_block = model.transformer.h[-1]
+    g = last_block.W_gm.weight.grad
+    assert g is not None and torch.isfinite(g).all() and g.abs().sum().item() > 0, \
+        "last block W_gm.weight should have nonzero grad when aux_loss_weight > 0"
+    # M_head also gets gradient
+    assert model.M_head.weight.grad is not None
+    assert model.M_head.weight.grad.abs().sum().item() > 0
+    print("PASS (d): aux loss activates last-block W_gm gradient and M_head")
+
+
 if __name__ == "__main__":
     test_no_nan_and_gate_grads()
     test_use_m_gate_false_matches_vanilla()
+    test_aux_loss_activates_last_block()
     print("\nAll tests passed.")
