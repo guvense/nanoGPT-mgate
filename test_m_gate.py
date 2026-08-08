@@ -151,7 +151,42 @@ def test_use_m_gate_false_matches_vanilla():
     print("PASS (c): use_m_gate=False is bit-identical to vanilla (params + forward output)")
 
 
+def test_m_gate_detached_ablation():
+    """With m_gate_detached=True: M is still computed each forward, but the .detach() before
+    K/V bias cuts ALL gradient flow into W_gm (since M's only downstream user — the next block's
+    K/V bias — sees a detached tensor). So in the detached model, W_gm never learns; its outputs
+    remain functions of the fixed init throughout training. W_kvm still learns via same-block
+    attention. This is the ablation for 'does joint end-to-end learning of M matter?'"""
+    kw = small_cfg()
+
+    torch.manual_seed(0)
+    m_full = GPT(GPTConfig(use_m_gate=True, m_gate_detached=False, **kw))
+    torch.manual_seed(0)
+    m_det = GPT(GPTConfig(use_m_gate=True, m_gate_detached=True, **kw))
+
+    idx = torch.randint(0, kw["vocab_size"], (2, 16))
+    tgt = torch.randint(0, kw["vocab_size"], (2, 16))
+    for m in (m_full, m_det):
+        _, loss = m(idx, tgt)
+        assert torch.isfinite(loss)
+        loss.backward()
+
+    # Full model: block-0 W_gm receives grad from downstream K/V-bias usage (nonzero).
+    full_g = m_full.transformer.h[0].W_gm.weight.grad
+    assert full_g is not None and full_g.abs().sum().item() > 0, "full model: W_gm should get grad"
+    # Detached model: block-0 W_gm has no downstream user of its gradient path → grad is None.
+    det_g = m_det.transformer.h[0].W_gm.weight.grad
+    assert det_g is None or det_g.abs().sum().item() == 0, \
+        f"detached model: W_gm should have zero/None grad, got sum={det_g.abs().sum().item() if det_g is not None else None}"
+    # But W_kvm still learns from same-block attention (except block 0 where M_prev=0):
+    for i, blk in enumerate(m_det.transformer.h[1:], start=1):
+        g = blk.attn.W_kvm.weight.grad
+        assert g is not None and torch.isfinite(g).all()
+    print("PASS (e): detached ablation kills W_gm learning (as designed), W_kvm still learns per block")
+
+
 if __name__ == "__main__":
     test_no_nan_and_gate_grads()
     test_use_m_gate_false_matches_vanilla()
+    test_m_gate_detached_ablation()
     print("\nAll tests passed.")

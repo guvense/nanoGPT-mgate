@@ -53,6 +53,7 @@ class CausalSelfAttention(nn.Module):
         # kernel launches in half. Constructed only when enabled so the flag-off path
         # remains bit-identical to vanilla.
         self.use_m_gate = config.use_m_gate
+        self.m_gate_detached = config.m_gate_detached
         if self.use_m_gate:
             self.W_kvm = nn.Linear(config.n_embd, 2 * config.n_embd, bias=config.bias)
 
@@ -62,8 +63,11 @@ class CausalSelfAttention(nn.Module):
         # calculate query, key, values for all heads in batch and move head forward to be the batch dim
         q, k, v  = self.c_attn(x).split(self.n_embd, dim=2)
         if self.use_m_gate:
-            # M biases what each token "offers" to attention (K) and "delivers" (V), per-token
-            km, vm = self.W_kvm(M_prev).split(self.n_embd, dim=2)
+            # M biases what each token "offers" to attention (K) and "delivers" (V), per-token.
+            # `m_gate_detached=True` cuts the cross-layer gradient flow through M — an ablation
+            # to test whether cross-layer LEARNING of M matters (vs just per-block extra capacity).
+            src = M_prev.detach() if self.m_gate_detached else M_prev
+            km, vm = self.W_kvm(src).split(self.n_embd, dim=2)
             k = k + km
             v = v + vm
         k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
@@ -145,6 +149,7 @@ class GPTConfig:
     dropout: float = 0.0
     bias: bool = True # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
     use_m_gate: bool = False # if True, add a per-token gated purpose state M that flows across blocks
+    m_gate_detached: bool = False # if True (with use_m_gate), detach M_prev before K/V bias — kills cross-layer gradient flow (ablation)
 
 class GPT(nn.Module):
 
