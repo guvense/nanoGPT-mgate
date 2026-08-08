@@ -1,0 +1,118 @@
+===== SEED=42 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2195, val loss 4.2139
+iter 0: loss 4.2202, time 1018.36ms, mfu -100.00%
+step 500: train loss 2.2350, val loss 2.2638
+iter 500: loss 2.3331, time 487.13ms, mfu 0.01%
+step 1000: train loss 1.9540, val loss 2.0407
+iter 1000: loss 2.0848, time 462.06ms, mfu 0.02%
+step 1500: train loss 1.7941, val loss 1.9370
+iter 1500: loss 1.9322, time 491.94ms, mfu 0.02%
+step 2000: train loss 1.7089, val loss 1.8761
+iter 2000: loss 1.8874, time 470.50ms, mfu 0.02%
+step 2500: train loss 1.6611, val loss 1.8253
+iter 2500: loss 1.7535, time 485.30ms, mfu 0.02%
+step 3000: train loss 1.6342, val loss 1.7835
+iter 3000: loss 1.7795, time 486.02ms, mfu 0.02%
+===== SEED=42 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.1807, val loss 4.1780
+iter 0: loss 4.1823, time 1068.46ms, mfu -100.00%
+  gate: mean 0.5011, std 0.0525
+step 500: train loss 2.2149, val loss 2.2349
+iter 500: loss 2.2873, time 847.11ms, mfu 0.01%
+  gate: mean 0.5869, std 0.1822
+step 1000: train loss 1.8793, val loss 1.9846
+iter 1000: loss 1.9913, time 865.03ms, mfu 0.01%
+  gate: mean 0.6359, std 0.1966
+step 1500: train loss 1.7257, val loss 1.8885
+iter 1500: loss 1.8801, time 854.19ms, mfu 0.01%
+  gate: mean 0.6471, std 0.2051
+step 2000: train loss 1.6321, val loss 1.8161
+iter 2000: loss 1.7990, time 827.90ms, mfu 0.01%
+  gate: mean 0.6451, std 0.2132
+step 2500: train loss 1.5926, val loss 1.7816
+iter 2500: loss 1.7010, time 851.82ms, mfu 0.01%
+  gate: mean 0.6426, std 0.2159
+step 3000: train loss 1.5738, val loss 1.7532
+iter 3000: loss 1.7399, time 849.35ms, mfu 0.01%
+  gate: mean 0.6429, std 0.2178
+===== SEED=123 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2151, val loss 4.2128
+iter 0: loss 4.2090, time 693.37ms, mfu -100.00%
+step 500: train loss 2.2421, val loss 2.2658
+iter 500: loss 2.3038, time 511.53ms, mfu 0.01%
+step 1000: train loss 1.9724, val loss 2.0416
+iter 1000: loss 2.0915, time 497.09ms, mfu 0.01%
+step 1500: train loss 1.7967, val loss 1.9167
+iter 1500: loss 1.9464, time 473.09ms, mfu 0.01%
+step 2000: train loss 1.7003, val loss 1.8650
+iter 2000: loss 1.8109, time 478.76ms, mfu 0.01%
+step 2500: train loss 1.6565, val loss 1.8305
+iter 2500: loss 1.8038, time 469.55ms, mfu 0.01%
+step 3000: train loss 1.6412, val loss 1.8003
+iter 3000: loss 1.7424, time 488.61ms, mfu 0.01%
+===== SEED=123 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.2136, val loss 4.2064
+iter 0: loss 4.2179, time 997.80ms, mfu -100.00%
+  gate: mean 0.4998, std 0.0525
+step 500: train loss 2.2147, val loss 2.2425
+iter 500: loss 2.2910, time 853.93ms, mfu 0.01%
+  gate: mean 0.5891, std 0.1865
+step 1000: train loss 1.8837, val loss 1.9670
+iter 1000: loss 1.9870, time 869.94ms, mfu 0.01%
+  gate: mean 0.6387, std 0.1976
+step 1500: train loss 1.7222, val loss 1.8538
+iter 1500: loss 1.8065, time 833.96ms, mfu 0.01%
+  gate: mean 0.6426, std 0.2083
+step 2000: train loss 1.6394, val loss 1.8064
+iter 2000: loss 1.7920, time 877.54ms, mfu 0.01%
+  gate: mean 0.6404, std 0.2143
+step 2500: train loss 1.6051, val loss 1.7708
+iter 2500: loss 1.7137, time 874.77ms, mfu 0.01%
+  gate: mean 0.6399, std 0.2180
+step 3000: train loss 1.5725, val loss 1.7528
+iter 3000: loss 1.7109, time 835.22ms, mfu 0.01%
+  gate: mean 0.6377, std 0.2189
+===== SEED=2024 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2132, val loss 4.2110
+iter 0: loss 4.2107, time 680.70ms, mfu -100.00%
+step 500: train loss 2.2351, val loss 2.2618
+iter 500: loss 2.3170, time 496.41ms, mfu 0.01%
+step 1000: train loss 1.9826, val loss 2.0579
+iter 1000: loss 2.0985, time 481.95ms, mfu 0.01%
+step 1500: train loss 1.7904, val loss 1.9347
+iter 1500: loss 1.9197, time 479.34ms, mfu 0.01%
+step 2000: train loss 1.6976, val loss 1.8558
+iter 2000: loss 1.8650, time 490.14ms, mfu 0.01%
+step 2500: train loss 1.6593, val loss 1.8230
+iter 2500: loss 1.7847, time 479.56ms, mfu 0.01%
+step 3000: train loss 1.6364, val loss 1.8029
+iter 3000: loss 1.7248, time 485.82ms, mfu 0.01%
+===== SEED=2024 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.2156, val loss 4.2140
+iter 0: loss 4.2073, time 1039.41ms, mfu -100.00%
+  gate: mean 0.5004, std 0.0527
+step 500: train loss 2.2092, val loss 2.2365
+iter 500: loss 2.3119, time 860.25ms, mfu 0.01%
+  gate: mean 0.5843, std 0.1817
+step 1000: train loss 1.8729, val loss 1.9592
+iter 1000: loss 2.0604, time 883.74ms, mfu 0.01%
+  gate: mean 0.6381, std 0.1902
+step 1500: train loss 1.7176, val loss 1.8804
+iter 1500: loss 1.8097, time 815.13ms, mfu 0.01%
+  gate: mean 0.6400, std 0.2039
+step 2000: train loss 1.6298, val loss 1.8007
+iter 2000: loss 1.7094, time 869.04ms, mfu 0.01%
+  gate: mean 0.6394, std 0.2095
+step 2500: train loss 1.5967, val loss 1.7614
+iter 2500: loss 1.6502, time 821.26ms, mfu 0.01%
+  gate: mean 0.6379, std 0.2130
+step 3000: train loss 1.5689, val loss 1.7478
+iter 3000: loss 1.7053, time 846.74ms, mfu 0.01%
+  gate: mean 0.6364, std 0.2148
+DONE

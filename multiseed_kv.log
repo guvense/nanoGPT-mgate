@@ -1,0 +1,49 @@
+===== SEED=42 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.1807, val loss 4.1780
+  gate: mean 0.5011, std 0.0525
+step 1500: train loss 1.8227, val loss 1.9436
+  gate: mean 0.6330, std 0.1931
+===== SEED=123 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.2136, val loss 4.2064
+  gate: mean 0.4998, std 0.0525
+step 1500: train loss 1.8324, val loss 1.9377
+  gate: mean 0.6262, std 0.1951
+===== SEED=2024 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.2156, val loss 4.2140
+  gate: mean 0.5004, std 0.0527
+step 1500: train loss 1.8199, val loss 1.9307
+  gate: mean 0.6240, std 0.1893
+===== SEED=7 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.2082, val loss 4.2055
+  gate: mean 0.5004, std 0.0518
+step 1500: train loss 1.8168, val loss 1.9386
+  gate: mean 0.6240, std 0.1931
+===== SEED=314 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.2087, val loss 4.2051
+  gate: mean 0.4995, std 0.0521
+step 1500: train loss 1.8261, val loss 1.9409
+  gate: mean 0.6202, std 0.1964
+===== SEED=555 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.2073, val loss 4.2041
+  gate: mean 0.5007, std 0.0524
+step 1500: train loss 1.8336, val loss 1.9435
+  gate: mean 0.6267, std 0.1930
+===== SEED=999 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.1884, val loss 4.1819
+  gate: mean 0.4998, std 0.0518
+step 1500: train loss 1.8342, val loss 1.9365
+  gate: mean 0.6217, std 0.1903
+===== SEED=1234 MGATE-KV =====
+number of parameters: 0.81M
+step 0: train loss 4.1872, val loss 4.1868
+  gate: mean 0.5000, std 0.0522
+step 1500: train loss 1.8329, val loss 1.9501
+  gate: mean 0.6242, std 0.1889
+DONE

@@ -1,0 +1,51 @@
+===== SEED=7 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.1865, val loss 4.1877
+step 1500: train loss 1.8899, val loss 2.0020
+===== SEED=7 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.2044, val loss 4.2022
+  gate: mean 0.5007, std 0.0539
+step 1500: train loss 1.8855, val loss 1.9894
+  gate: mean 0.5806, std 0.2630
+===== SEED=314 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.1870, val loss 4.1867
+step 1500: train loss 1.8922, val loss 1.9920
+===== SEED=314 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.2033, val loss 4.2007
+  gate: mean 0.5008, std 0.0537
+step 1500: train loss 1.9182, val loss 2.0082
+  gate: mean 0.5854, std 0.2665
+===== SEED=555 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.1832, val loss 4.1857
+step 1500: train loss 1.8918, val loss 1.9799
+===== SEED=555 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.2017, val loss 4.1995
+  gate: mean 0.5005, std 0.0539
+step 1500: train loss 1.9053, val loss 1.9980
+  gate: mean 0.5821, std 0.2612
+===== SEED=999 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2102, val loss 4.2043
+step 1500: train loss 1.8831, val loss 1.9875
+===== SEED=999 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.1867, val loss 4.1836
+  gate: mean 0.5011, std 0.0538
+step 1500: train loss 1.8848, val loss 1.9902
+  gate: mean 0.5756, std 0.2602
+===== SEED=1234 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2036, val loss 4.2012
+step 1500: train loss 1.9008, val loss 1.9930
+===== SEED=1234 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.1900, val loss 4.1881
+  gate: mean 0.4996, std 0.0537
+step 1500: train loss 1.9020, val loss 1.9960
+  gate: mean 0.5834, std 0.2656
+DONE

@@ -1,0 +1,31 @@
+===== SEED=42 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2195, val loss 4.2139
+step 1500: train loss 1.8833, val loss 1.9945
+===== SEED=42 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.2100, val loss 4.2079
+  gate: mean 0.4997, std 0.0540
+step 1500: train loss 1.8999, val loss 1.9966
+  gate: mean 0.5727, std 0.2651
+===== SEED=123 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2151, val loss 4.2128
+step 1500: train loss 1.9036, val loss 1.9993
+===== SEED=123 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.2192, val loss 4.2188
+  gate: mean 0.5002, std 0.0537
+step 1500: train loss 1.8837, val loss 1.9780
+  gate: mean 0.5803, std 0.2610
+===== SEED=2024 BASELINE =====
+number of parameters: 0.80M
+step 0: train loss 4.2132, val loss 4.2110
+step 1500: train loss 1.9108, val loss 2.0020
+===== SEED=2024 MGATE-MLP =====
+number of parameters: 0.82M
+step 0: train loss 4.2257, val loss 4.2198
+  gate: mean 0.4993, std 0.0541
+step 1500: train loss 1.8957, val loss 1.9952
+  gate: mean 0.5838, std 0.2644
+DONE

@@ -1,0 +1,244 @@
+===== SEED=42 VANILLA-BIG (n=152, 3000 iters, ~1.48M) =====
+number of parameters: 1.12M
+step 0: train loss 4.1996, val loss 4.1957
+iter 0: loss 4.2024, time 2484.40ms, mfu -100.00%
+step 500: train loss 2.1753, val loss 2.2172
+iter 500: loss 2.2884, time 917.39ms, mfu 0.01%
+step 1000: train loss 1.8966, val loss 1.9968
+iter 1000: loss 2.0259, time 934.23ms, mfu 0.01%
+step 1500: train loss 1.7160, val loss 1.8719
+iter 1500: loss 1.8755, time 883.28ms, mfu 0.01%
+step 2000: train loss 1.6281, val loss 1.8087
+iter 2000: loss 1.7708, time 909.89ms, mfu 0.01%
+step 2500: train loss 1.5870, val loss 1.7652
+iter 2500: loss 1.6982, time 911.51ms, mfu 0.01%
+step 3000: train loss 1.5634, val loss 1.7466
+iter 3000: loss 1.6916, time 909.68ms, mfu 0.01%
+WALL_CLOCK: 110s
+===== SEED=42 VANILLA-LONG (n=128, 4500 iters, 0.80M) =====
+number of parameters: 0.80M
+step 0: train loss 4.2195, val loss 4.2139
+iter 0: loss 4.2202, time 655.51ms, mfu -100.00%
+step 500: train loss 2.2346, val loss 2.2635
+iter 500: loss 2.3325, time 484.77ms, mfu 0.02%
+step 1000: train loss 1.9542, val loss 2.0431
+iter 1000: loss 2.0816, time 490.42ms, mfu 0.02%
+step 1500: train loss 1.7857, val loss 1.9322
+iter 1500: loss 1.9235, time 493.79ms, mfu 0.02%
+step 2000: train loss 1.6910, val loss 1.8648
+iter 2000: loss 1.8729, time 488.31ms, mfu 0.02%
+step 2500: train loss 1.6338, val loss 1.7976
+iter 2500: loss 1.7257, time 501.63ms, mfu 0.01%
+step 3000: train loss 1.5843, val loss 1.7344
+iter 3000: loss 1.7270, time 489.39ms, mfu 0.01%
+step 3500: train loss 1.5467, val loss 1.7193
+iter 3500: loss 1.7404, time 506.76ms, mfu 0.01%
+step 4000: train loss 1.5276, val loss 1.7033
+iter 4000: loss 1.6295, time 486.80ms, mfu 0.01%
+step 4500: train loss 1.5150, val loss 1.6797
+iter 4500: loss 1.6956, time 478.00ms, mfu 0.01%
+WALL_CLOCK: 115s
+===== SEED=123 VANILLA-BIG (n=152, 3000 iters, ~1.48M) =====
+number of parameters: 1.12M
+step 0: train loss 4.2108, val loss 4.2104
+iter 0: loss 4.2090, time 1075.72ms, mfu -100.00%
+step 500: train loss 2.1880, val loss 2.2258
+iter 500: loss 2.2443, time 907.41ms, mfu 0.01%
+step 1000: train loss 1.8888, val loss 1.9903
+iter 1000: loss 2.0144, time 873.33ms, mfu 0.01%
+step 1500: train loss 1.7234, val loss 1.8766
+iter 1500: loss 1.9151, time 914.02ms, mfu 0.01%
+step 2000: train loss 1.6290, val loss 1.8102
+iter 2000: loss 1.7844, time 897.11ms, mfu 0.01%
+step 2500: train loss 1.5857, val loss 1.7535
+iter 2500: loss 1.6832, time 886.67ms, mfu 0.01%
+step 3000: train loss 1.5638, val loss 1.7389
+iter 3000: loss 1.6922, time 879.04ms, mfu 0.01%
+WALL_CLOCK: 107s
+===== SEED=123 VANILLA-LONG (n=128, 4500 iters, 0.80M) =====
+number of parameters: 0.80M
+step 0: train loss 4.2151, val loss 4.2128
+iter 0: loss 4.2090, time 660.26ms, mfu -100.00%
+step 500: train loss 2.2412, val loss 2.2649
+iter 500: loss 2.3031, time 618.88ms, mfu 0.01%
+step 1000: train loss 1.9657, val loss 2.0363
+iter 1000: loss 2.0861, time 475.51ms, mfu 0.01%
+step 1500: train loss 1.7875, val loss 1.9126
+iter 1500: loss 1.9424, time 469.25ms, mfu 0.01%
+step 2000: train loss 1.6812, val loss 1.8472
+iter 2000: loss 1.7964, time 488.55ms, mfu 0.01%
+step 2500: train loss 1.6241, val loss 1.8034
+iter 2500: loss 1.7782, time 509.92ms, mfu 0.01%
+step 3000: train loss 1.5925, val loss 1.7589
+iter 3000: loss 1.6827, time 980.43ms, mfu 0.01%
+step 3500: train loss 1.5487, val loss 1.7401
+iter 3500: loss 1.7075, time 541.05ms, mfu 0.01%
+step 4000: train loss 1.5274, val loss 1.7140
+iter 4000: loss 1.6738, time 484.79ms, mfu 0.01%
+step 4500: train loss 1.5113, val loss 1.7009
+iter 4500: loss 1.6264, time 560.11ms, mfu 0.01%
+WALL_CLOCK: 118s
+===== SEED=2024 VANILLA-BIG (n=152, 3000 iters, ~1.48M) =====
+number of parameters: 1.12M
+step 0: train loss 4.2392, val loss 4.2350
+iter 0: loss 4.2255, time 1309.86ms, mfu -100.00%
+step 500: train loss 2.1796, val loss 2.2219
+iter 500: loss 2.3039, time 1146.54ms, mfu 0.01%
+step 1000: train loss 1.8840, val loss 1.9956
+iter 1000: loss 1.9838, time 906.79ms, mfu 0.01%
+step 1500: train loss 1.7226, val loss 1.8792
+iter 1500: loss 1.8315, time 924.08ms, mfu 0.01%
+step 2000: train loss 1.6433, val loss 1.8205
+iter 2000: loss 1.7708, time 892.89ms, mfu 0.01%
+step 2500: train loss 1.5975, val loss 1.7698
+iter 2500: loss 1.7656, time 875.04ms, mfu 0.01%
+step 3000: train loss 1.5810, val loss 1.7497
+iter 3000: loss 1.6971, time 892.73ms, mfu 0.01%
+WALL_CLOCK: 108s
+===== SEED=2024 VANILLA-LONG (n=128, 4500 iters, 0.80M) =====
+number of parameters: 0.80M
+step 0: train loss 4.2132, val loss 4.2110
+iter 0: loss 4.2107, time 661.88ms, mfu -100.00%
+step 500: train loss 2.2348, val loss 2.2618
+iter 500: loss 2.3163, time 527.87ms, mfu 0.01%
+step 1000: train loss 1.9803, val loss 2.0583
+iter 1000: loss 2.0946, time 469.06ms, mfu 0.01%
+step 1500: train loss 1.7824, val loss 1.9307
+iter 1500: loss 1.9090, time 480.82ms, mfu 0.01%
+step 2000: train loss 1.6800, val loss 1.8381
+iter 2000: loss 1.8571, time 507.68ms, mfu 0.01%
+step 2500: train loss 1.6280, val loss 1.7916
+iter 2500: loss 1.7597, time 472.98ms, mfu 0.01%
+step 3000: train loss 1.5846, val loss 1.7573
+iter 3000: loss 1.6778, time 484.97ms, mfu 0.01%
+step 3500: train loss 1.5572, val loss 1.7212
+iter 3500: loss 1.7253, time 476.03ms, mfu 0.01%
+step 4000: train loss 1.5284, val loss 1.7174
+iter 4000: loss 1.6318, time 487.56ms, mfu 0.01%
+step 4500: train loss 1.5225, val loss 1.6953
+iter 4500: loss 1.6860, time 490.25ms, mfu 0.01%
+WALL_CLOCK: 115s
+===== SEED=42 KV-BIAS-TIMED (n=112, 3000 iters, 0.81M) =====
+number of parameters: 0.81M
+step 0: train loss 4.1807, val loss 4.1780
+iter 0: loss 4.1823, time 1003.95ms, mfu -100.00%
+  gate: mean 0.5011, std 0.0525
+step 500: train loss 2.2149, val loss 2.2349
+iter 500: loss 2.2873, time 833.46ms, mfu 0.01%
+  gate: mean 0.5869, std 0.1822
+step 1000: train loss 1.8793, val loss 1.9846
+iter 1000: loss 1.9913, time 1037.15ms, mfu 0.01%
+  gate: mean 0.6359, std 0.1966
+step 1500: train loss 1.7257, val loss 1.8885
+iter 1500: loss 1.8801, time 811.52ms, mfu 0.01%
+  gate: mean 0.6471, std 0.2051
+step 2000: train loss 1.6321, val loss 1.8161
+iter 2000: loss 1.7990, time 831.55ms, mfu 0.01%
+  gate: mean 0.6451, std 0.2132
+step 2500: train loss 1.5926, val loss 1.7816
+iter 2500: loss 1.7010, time 877.03ms, mfu 0.01%
+  gate: mean 0.6426, std 0.2159
+step 3000: train loss 1.5738, val loss 1.7532
+iter 3000: loss 1.7399, time 846.15ms, mfu 0.01%
+  gate: mean 0.6429, std 0.2178
+WALL_CLOCK: 97s
+===== SEED=123 KV-BIAS-TIMED (n=112, 3000 iters, 0.81M) =====
+number of parameters: 0.81M
+step 0: train loss 4.2136, val loss 4.2064
+iter 0: loss 4.2179, time 1021.54ms, mfu -100.00%
+  gate: mean 0.4998, std 0.0525
+step 500: train loss 2.2147, val loss 2.2425
+iter 500: loss 2.2910, time 883.73ms, mfu 0.01%
+  gate: mean 0.5891, std 0.1865
+step 1000: train loss 1.8837, val loss 1.9670
+iter 1000: loss 1.9870, time 873.64ms, mfu 0.01%
+  gate: mean 0.6387, std 0.1976
+step 1500: train loss 1.7222, val loss 1.8538
+iter 1500: loss 1.8065, time 839.86ms, mfu 0.01%
+  gate: mean 0.6426, std 0.2083
+step 2000: train loss 1.6394, val loss 1.8064
+iter 2000: loss 1.7920, time 881.01ms, mfu 0.01%
+  gate: mean 0.6404, std 0.2143
+step 2500: train loss 1.6051, val loss 1.7708
+iter 2500: loss 1.7137, time 831.52ms, mfu 0.01%
+  gate: mean 0.6399, std 0.2180
+step 3000: train loss 1.5725, val loss 1.7528
+iter 3000: loss 1.7109, time 882.97ms, mfu 0.01%
+  gate: mean 0.6377, std 0.2189
+WALL_CLOCK: 98s
+===== SEED=2024 KV-BIAS-TIMED (n=112, 3000 iters, 0.81M) =====
+number of parameters: 0.81M
+step 0: train loss 4.2156, val loss 4.2140
+iter 0: loss 4.2073, time 1029.67ms, mfu -100.00%
+  gate: mean 0.5004, std 0.0527
+step 500: train loss 2.2092, val loss 2.2365
+iter 500: loss 2.3119, time 866.08ms, mfu 0.01%
+  gate: mean 0.5843, std 0.1817
+step 1000: train loss 1.8729, val loss 1.9592
+iter 1000: loss 2.0604, time 812.85ms, mfu 0.01%
+  gate: mean 0.6381, std 0.1902
+step 1500: train loss 1.7176, val loss 1.8804
+iter 1500: loss 1.8097, time 865.35ms, mfu 0.01%
+  gate: mean 0.6400, std 0.2039
+step 2000: train loss 1.6298, val loss 1.8007
+iter 2000: loss 1.7094, time 804.64ms, mfu 0.01%
+  gate: mean 0.6394, std 0.2095
+step 2500: train loss 1.5967, val loss 1.7614
+iter 2500: loss 1.6502, time 861.44ms, mfu 0.01%
+  gate: mean 0.6379, std 0.2130
+step 3000: train loss 1.5689, val loss 1.7478
+iter 3000: loss 1.7053, time 837.90ms, mfu 0.01%
+  gate: mean 0.6364, std 0.2148
+WALL_CLOCK: 98s
+===== SEED=42 VANILLA-BASELINE-TIMED (n=128, 3000 iters, 0.80M) =====
+number of parameters: 0.80M
+step 0: train loss 4.2195, val loss 4.2139
+iter 0: loss 4.2202, time 659.18ms, mfu -100.00%
+step 500: train loss 2.2350, val loss 2.2638
+iter 500: loss 2.3331, time 476.61ms, mfu 0.02%
+step 1000: train loss 1.9540, val loss 2.0407
+iter 1000: loss 2.0848, time 494.80ms, mfu 0.02%
+step 1500: train loss 1.7941, val loss 1.9370
+iter 1500: loss 1.9322, time 748.62ms, mfu 0.01%
+step 2000: train loss 1.7089, val loss 1.8761
+iter 2000: loss 1.8874, time 688.00ms, mfu 0.01%
+step 2500: train loss 1.6611, val loss 1.8253
+iter 2500: loss 1.7535, time 463.52ms, mfu 0.01%
+step 3000: train loss 1.6342, val loss 1.7835
+iter 3000: loss 1.7795, time 471.59ms, mfu 0.01%
+WALL_CLOCK: 77s
+===== SEED=123 VANILLA-BASELINE-TIMED (n=128, 3000 iters, 0.80M) =====
+number of parameters: 0.80M
+step 0: train loss 4.2151, val loss 4.2128
+iter 0: loss 4.2090, time 731.40ms, mfu -100.00%
+step 500: train loss 2.2421, val loss 2.2658
+iter 500: loss 2.3038, time 510.53ms, mfu 0.01%
+step 1000: train loss 1.9724, val loss 2.0416
+iter 1000: loss 2.0915, time 486.05ms, mfu 0.01%
+step 1500: train loss 1.7967, val loss 1.9167
+iter 1500: loss 1.9464, time 506.97ms, mfu 0.01%
+step 2000: train loss 1.7003, val loss 1.8650
+iter 2000: loss 1.8109, time 502.35ms, mfu 0.01%
+step 2500: train loss 1.6565, val loss 1.8305
+iter 2500: loss 1.8038, time 509.34ms, mfu 0.01%
+step 3000: train loss 1.6412, val loss 1.8003
+iter 3000: loss 1.7424, time 473.71ms, mfu 0.01%
+WALL_CLOCK: 78s
+===== SEED=2024 VANILLA-BASELINE-TIMED (n=128, 3000 iters, 0.80M) =====
+number of parameters: 0.80M
+step 0: train loss 4.2132, val loss 4.2110
+iter 0: loss 4.2107, time 673.99ms, mfu -100.00%
+step 500: train loss 2.2351, val loss 2.2618
+iter 500: loss 2.3170, time 501.31ms, mfu 0.01%
+step 1000: train loss 1.9826, val loss 2.0579
+iter 1000: loss 2.0985, time 490.32ms, mfu 0.01%
+step 1500: train loss 1.7904, val loss 1.9347
+iter 1500: loss 1.9197, time 471.73ms, mfu 0.01%
+step 2000: train loss 1.6976, val loss 1.8558
+iter 2000: loss 1.8650, time 478.53ms, mfu 0.01%
+step 2500: train loss 1.6593, val loss 1.8230
+iter 2500: loss 1.7847, time 482.35ms, mfu 0.01%
+step 3000: train loss 1.6364, val loss 1.8029
+iter 3000: loss 1.7248, time 488.61ms, mfu 0.01%
+WALL_CLOCK: 77s
+DONE

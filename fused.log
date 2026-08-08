@@ -1,0 +1,73 @@
+===== SEED=42 KV-FUSED (n=112, 3000 iters) =====
+number of parameters: 0.81M
+step 0: train loss 4.1807, val loss 4.1780
+iter 0: loss 4.1823, time 1959.43ms, mfu -100.00%
+  gate: mean 0.5011, std 0.0525
+step 500: train loss 2.2149, val loss 2.2349
+iter 500: loss 2.2873, time 1254.89ms, mfu 0.01%
+  gate: mean 0.5869, std 0.1822
+step 1000: train loss 1.8793, val loss 1.9846
+iter 1000: loss 1.9913, time 1061.44ms, mfu 0.01%
+  gate: mean 0.6359, std 0.1966
+step 1500: train loss 1.7257, val loss 1.8885
+iter 1500: loss 1.8801, time 1240.23ms, mfu 0.01%
+  gate: mean 0.6471, std 0.2051
+step 2000: train loss 1.6321, val loss 1.8161
+iter 2000: loss 1.7990, time 1037.63ms, mfu 0.01%
+  gate: mean 0.6451, std 0.2132
+step 2500: train loss 1.5926, val loss 1.7816
+iter 2500: loss 1.7010, time 1254.45ms, mfu 0.01%
+  gate: mean 0.6426, std 0.2159
+step 3000: train loss 1.5738, val loss 1.7532
+iter 3000: loss 1.7399, time 1032.86ms, mfu 0.01%
+  gate: mean 0.6429, std 0.2178
+WALL_CLOCK: 122s
+===== SEED=123 KV-FUSED (n=112, 3000 iters) =====
+number of parameters: 0.81M
+step 0: train loss 4.2136, val loss 4.2064
+iter 0: loss 4.2179, time 1207.72ms, mfu -100.00%
+  gate: mean 0.4998, std 0.0525
+step 500: train loss 2.2147, val loss 2.2425
+iter 500: loss 2.2910, time 1264.61ms, mfu 0.01%
+  gate: mean 0.5891, std 0.1865
+step 1000: train loss 1.8837, val loss 1.9670
+iter 1000: loss 1.9870, time 1265.08ms, mfu 0.01%
+  gate: mean 0.6387, std 0.1976
+step 1500: train loss 1.7222, val loss 1.8538
+iter 1500: loss 1.8065, time 1039.16ms, mfu 0.01%
+  gate: mean 0.6426, std 0.2083
+step 2000: train loss 1.6394, val loss 1.8064
+iter 2000: loss 1.7920, time 1226.14ms, mfu 0.01%
+  gate: mean 0.6404, std 0.2143
+step 2500: train loss 1.6051, val loss 1.7708
+iter 2500: loss 1.7137, time 1179.80ms, mfu 0.01%
+  gate: mean 0.6399, std 0.2180
+step 3000: train loss 1.5725, val loss 1.7528
+iter 3000: loss 1.7109, time 1305.04ms, mfu 0.01%
+  gate: mean 0.6377, std 0.2189
+WALL_CLOCK: 121s
+===== SEED=2024 KV-FUSED (n=112, 3000 iters) =====
+number of parameters: 0.81M
+step 0: train loss 4.2156, val loss 4.2140
+iter 0: loss 4.2073, time 1348.01ms, mfu -100.00%
+  gate: mean 0.5004, std 0.0527
+step 500: train loss 2.2092, val loss 2.2365
+iter 500: loss 2.3119, time 1368.49ms, mfu 0.01%
+  gate: mean 0.5843, std 0.1817
+step 1000: train loss 1.8729, val loss 1.9592
+iter 1000: loss 2.0604, time 1199.99ms, mfu 0.01%
+  gate: mean 0.6381, std 0.1902
+step 1500: train loss 1.7176, val loss 1.8804
+iter 1500: loss 1.8097, time 1084.94ms, mfu 0.01%
+  gate: mean 0.6400, std 0.2039
+step 2000: train loss 1.6298, val loss 1.8007
+iter 2000: loss 1.7094, time 1034.15ms, mfu 0.01%
+  gate: mean 0.6394, std 0.2095
+step 2500: train loss 1.5967, val loss 1.7614
+iter 2500: loss 1.6502, time 1422.57ms, mfu 0.01%
+  gate: mean 0.6379, std 0.2130
+step 3000: train loss 1.5689, val loss 1.7478
+iter 3000: loss 1.7053, time 1375.62ms, mfu 0.01%
+  gate: mean 0.6364, std 0.2148
+WALL_CLOCK: 122s
+DONE
