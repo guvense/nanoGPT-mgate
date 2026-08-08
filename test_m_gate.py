@@ -86,7 +86,7 @@ def test_no_nan_and_gate_grads():
     model = GPT(cfg)
     idx = torch.randint(0, cfg.vocab_size, (2, 16))
     tgt = torch.randint(0, cfg.vocab_size, (2, 16))
-    logits, loss, aux_loss = model(idx, tgt)
+    logits, loss = model(idx, tgt)
     assert torch.isfinite(logits).all(), "logits contain NaN/Inf"
     assert torch.isfinite(loss), f"loss is NaN/Inf: {loss.item()}"
     loss.backward()
@@ -144,36 +144,14 @@ def test_use_m_gate_false_matches_vanilla():
     idx = torch.randint(0, kw["vocab_size"], (2, 16))
     tgt = torch.randint(0, kw["vocab_size"], (2, 16))
     with torch.no_grad():
-        l_mod, loss_mod, _ = m_mod(idx, tgt)
-        l_van, loss_van = m_van(idx, tgt)  # vanilla returns 2-tuple, unchanged
+        l_mod, loss_mod = m_mod(idx, tgt)
+        l_van, loss_van = m_van(idx, tgt)
     assert torch.equal(l_mod, l_van), "logits differ from vanilla — use_m_gate=False is not a true no-op"
     assert torch.equal(loss_mod, loss_van), "loss differs from vanilla"
     print("PASS (c): use_m_gate=False is bit-identical to vanilla (params + forward output)")
 
 
-def test_aux_loss_activates_last_block():
-    """With aux_loss_weight > 0, the last block's W_gm should now receive a nonzero
-    gradient (previously it was dead because M_final was discarded)."""
-    torch.manual_seed(0)
-    cfg = GPTConfig(use_m_gate=True, aux_loss_weight=0.3, **small_cfg())
-    model = GPT(cfg)
-    idx = torch.randint(0, cfg.vocab_size, (2, 16))
-    tgt = torch.randint(0, cfg.vocab_size, (2, 16))
-    logits, loss, aux_loss = model(idx, tgt)
-    assert torch.isfinite(loss), f"loss NaN/Inf: {loss}"
-    assert aux_loss is not None and torch.isfinite(aux_loss), f"aux_loss NaN/Inf: {aux_loss}"
-    total = loss + cfg.aux_loss_weight * aux_loss  # what train.py does
-    total.backward()
-    last_block = model.transformer.h[-1]
-    g = last_block.W_gm.weight.grad
-    assert g is not None and torch.isfinite(g).all() and g.abs().sum().item() > 0, \
-        "last block W_gm.weight should have nonzero grad when aux_loss_weight > 0"
-    assert model.M_head.weight.grad is not None and model.M_head.weight.grad.abs().sum().item() > 0
-    print("PASS (d): aux loss activates last-block W_gm gradient and M_head")
-
-
 if __name__ == "__main__":
     test_no_nan_and_gate_grads()
     test_use_m_gate_false_matches_vanilla()
-    test_aux_loss_activates_last_block()
     print("\nAll tests passed.")
