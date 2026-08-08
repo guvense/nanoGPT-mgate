@@ -22,10 +22,49 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from model import GPT, GPTConfig  # modified model with M-gate support
 
 
+VANILLA_MODEL_URL = "https://raw.githubusercontent.com/karpathy/nanoGPT/master/model.py"
+
+
 def load_vanilla_model_module():
-    """Extract pre-modification model.py from git HEAD and import as its own module."""
+    """Load a vanilla nanoGPT model.py for bit-identity comparison. Tries in order:
+    1. Most recent git commit whose model.py lacks 'use_m_gate' (pre-modification).
+    2. Fetch canonical vanilla from karpathy/nanoGPT on GitHub.
+    Returns None if neither works — caller should skip the test in that case."""
     repo_dir = os.path.dirname(os.path.abspath(__file__))
-    src = subprocess.check_output(["git", "show", "HEAD:model.py"], cwd=repo_dir)
+    src = None
+    # try local git history
+    try:
+        log = subprocess.check_output(
+            ["git", "log", "--format=%H", "--all", "--", "model.py"],
+            cwd=repo_dir, stderr=subprocess.DEVNULL,
+        ).decode().strip().split("\n")
+        for commit in log:
+            if not commit:
+                continue
+            try:
+                candidate = subprocess.check_output(
+                    ["git", "show", f"{commit}:model.py"],
+                    cwd=repo_dir, stderr=subprocess.DEVNULL,
+                )
+                if b"use_m_gate" not in candidate:
+                    src = candidate
+                    break
+            except subprocess.CalledProcessError:
+                continue
+    except Exception:
+        pass
+    # fallback: fetch canonical vanilla from GitHub
+    if src is None:
+        try:
+            import urllib.request
+            with urllib.request.urlopen(VANILLA_MODEL_URL, timeout=10) as r:
+                src = r.read()
+            if b"use_m_gate" in src:
+                src = None  # unexpected — upstream shouldn't have this
+        except Exception:
+            pass
+    if src is None:
+        return None
     with tempfile.NamedTemporaryFile(mode="wb", suffix=".py", delete=False) as f:
         f.write(src)
         path = f.name
@@ -75,6 +114,9 @@ def test_no_nan_and_gate_grads():
 
 def test_use_m_gate_false_matches_vanilla():
     vanilla = load_vanilla_model_module()
+    if vanilla is None:
+        print("SKIP (c): no vanilla model.py reference available (git history + network both unavailable)")
+        return
     kw = small_cfg()
 
     torch.manual_seed(1234)
