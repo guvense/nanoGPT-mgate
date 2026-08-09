@@ -79,15 +79,33 @@ def classify_candidate(cand, real_names):
 
 
 def sample_first_name(model, prompt_ids, itos, ctx, max_new=40, temperature=0.85, top_k=40, seed=0):
+    """Generate from prompt, extract the first candidate character-name-like token.
+    Skip any leading whitespace/newlines so we don't spuriously return '' when the
+    model produces a blank line before the name."""
     torch.manual_seed(seed)
     with ctx, torch.no_grad():
         out = model.generate(prompt_ids, max_new, temperature=temperature, top_k=top_k)
     text = "".join(itos[int(i)] for i in out[0].tolist())
-    # skip the initial prompt (which is just "\n")
-    body = text[1:] if text.startswith("\n") else text
-    # take up to first ':' or '\n'
-    end = min([body.find(x) for x in (":", "\n") if body.find(x) != -1] or [len(body)])
+    body = text[1:] if text.startswith("\n") else text  # drop initial prompt char
+    body = body.lstrip("\n \t")  # skip any additional leading whitespace/newlines
+    end_candidates = [body.find(x) for x in (":", "\n") if body.find(x) != -1]
+    end = min(end_candidates) if end_candidates else len(body)
     return body[:end]
+
+
+def count_names_in_generation(model, prompt_ids, itos, ctx, real_names,
+                              max_new=800, temperature=0.85, top_k=40, seed=0):
+    """Generate a long sample from prompt, extract ALL character-name headers
+    (lines matching '^NAME:$' pattern). Return counts of REAL vs OTHER."""
+    torch.manual_seed(seed)
+    with ctx, torch.no_grad():
+        out = model.generate(prompt_ids, max_new, temperature=temperature, top_k=top_k)
+    text = "".join(itos[int(i)] for i in out[0].tolist())
+    # Match lines that look like "NAME:" at line start, name = uppercase word(s)
+    name_headers = re.findall(r"(?m)^([A-Z][A-Za-z' ]{0,25}[A-Za-z]):", text)
+    real = sum(1 for n in name_headers if n in real_names)
+    invented = len(name_headers) - real
+    return real, invented, name_headers
 
 
 def main():
@@ -119,7 +137,7 @@ def main():
 
     prompt_ids = torch.tensor([stoi["\n"]], dtype=torch.long, device=device).unsqueeze(0)
 
-    def run(model, label):
+    def run_firstname(model, label):
         counts = Counter()
         samples_by_class = {"REAL": [], "VALID": [], "GARBLED": [], "SKIP": []}
         for i in range(args.n_samples):
@@ -134,30 +152,73 @@ def main():
         for cls in ("REAL", "VALID", "GARBLED", "SKIP"):
             n = counts[cls]
             pct = 100 * n / args.n_samples
-            examples = samples_by_class[cls][:5]
-            ex_str = ", ".join(repr(e) for e in examples)
+            ex_str = ", ".join(repr(e) for e in samples_by_class[cls][:5])
             print(f"  {cls:<8} {n:>3} ({pct:>5.1f}%)   e.g. {ex_str}")
         return counts
 
-    van_counts = run(m_van, "VANILLA")
-    kv_counts  = run(m_kv,  "K/V-BIAS")
-
-    # Summary table
+    # ---- TEST 1 (kept for reference, but note it's fragile — see readme) ----
+    print("\n\nTEST 1: first-token classification (fragile — inflates SKIP for models\n"
+          "        that begin with blank lines; use TEST 2 as the primary metric)\n")
+    van_c1 = run_firstname(m_van, "VANILLA")
+    kv_c1  = run_firstname(m_kv,  "K/V-BIAS")
     print("\n" + "=" * 60)
     print(f"{'class':<10} {'VANILLA':>12} {'K/V-BIAS':>12} {'delta':>10}")
     print("-" * 60)
     for cls in ("REAL", "VALID", "GARBLED", "SKIP"):
-        v = van_counts[cls]
-        k = kv_counts[cls]
-        d = k - v
-        print(f"{cls:<10} {v:>12} {k:>12} {d:>+10}")
+        v, k = van_c1[cls], kv_c1[cls]
+        print(f"{cls:<10} {v:>12} {k:>12} {k-v:>+10}")
     print("=" * 60)
-    print("\nInterpretation:")
-    print("  REAL   = the generated leading token matches a canonical character name")
-    print("  VALID  = plausibly-formatted all-caps name, not in canon")
-    print("  GARBLED = mixed-case, weird chars, or malformed")
-    print("  Higher (REAL+VALID) and lower GARBLED for K/V would confirm the")
-    print("  'general name mode' hypothesis.")
+
+    # ---- TEST 2 (PRIMARY): count all character-name headers in long generations ----
+    print("\n\nTEST 2 (primary): count all character-name headers in long generations")
+    print("Method: generate ~800 chars from '\\n', regex-extract all lines matching")
+    print("  '^NAME:$' and check which are in the canonical name set.\n")
+
+    def run_headers(model, label):
+        real_total = 0
+        invented_total = 0
+        real_examples = []
+        invented_examples = []
+        for i in range(args.n_samples):
+            r, iv, headers = count_names_in_generation(
+                model, prompt_ids, itos, ctx, real_names,
+                max_new=800, temperature=args.temperature, top_k=args.top_k, seed=i)
+            real_total += r
+            invented_total += iv
+            for h in headers:
+                if h in real_names and len(real_examples) < 8:
+                    real_examples.append(h)
+                elif h not in real_names and len(invented_examples) < 8:
+                    invented_examples.append(h)
+        total = real_total + invented_total
+        real_pct = 100 * real_total / total if total else 0
+        print(f"=== {label} ===")
+        print(f"  total name headers: {total}")
+        print(f"  REAL:      {real_total} ({real_pct:.1f}%)")
+        print(f"  INVENTED:  {invented_total} ({100-real_pct:.1f}%)")
+        print(f"  real examples:     {real_examples[:6]}")
+        print(f"  invented examples: {invented_examples[:6]}")
+        return real_total, invented_total, total
+
+    r_v, i_v, t_v = run_headers(m_van, "VANILLA")
+    r_k, i_k, t_k = run_headers(m_kv,  "K/V-BIAS")
+
+    print("\n" + "=" * 68)
+    print(f"{'metric':<26} {'VANILLA':>14} {'K/V-BIAS':>14}")
+    print("-" * 68)
+    print(f"{'total headers':<26} {t_v:>14} {t_k:>14}")
+    print(f"{'REAL':<26} {r_v:>14} {r_k:>14}")
+    print(f"{'INVENTED':<26} {i_v:>14} {i_k:>14}")
+    rv_pct = 100*r_v/t_v if t_v else 0
+    rk_pct = 100*r_k/t_k if t_k else 0
+    print(f"{'REAL fraction':<26} {rv_pct:>13.1f}% {rk_pct:>13.1f}%")
+    print("=" * 68)
+
+    print("\nInterpretation (TEST 2, primary):")
+    print("  Higher REAL fraction for K/V confirms that it produces coherent,")
+    print("  canonical Shakespeare character names when generating from scratch —")
+    print("  supporting the 'general name mode' hypothesis (M state helps the model")
+    print("  stay in name-mode consistently rather than memorizing bigrams).")
 
 
 if __name__ == "__main__":
