@@ -47,9 +47,13 @@ def load_model(ckpt_path, device):
 
 
 def per_position_loss(model, x, y, ctx):
-    """Per-position cross-entropy loss, shape (B, T)."""
+    """Per-position cross-entropy loss, shape (B, T).
+
+    Note: must pass y so model.forward computes the FULL (B, T, V) logits;
+    without targets, nanoGPT's inference optimization returns only the last
+    position's logits (B, 1, V)."""
     with ctx, torch.no_grad():
-        logits, _ = model(x)
+        logits, _ = model(x, y)
     B, T, V = logits.shape
     loss = F.cross_entropy(logits.view(B * T, V), y.view(B * T), reduction="none")
     return loss.view(B, T)
